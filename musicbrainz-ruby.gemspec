@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency('httparty', '~> 0.10.0')
-  s.add_runtime_dependency('hashie',   '~> 1.1.0')
+  s.add_runtime_dependency('hashie',   '~> 1.2.0')
 
   s.add_development_dependency('rspec',   '~> 2.12.0')
   s.add_development_dependency('fakeweb', '~> 1.3.0')
