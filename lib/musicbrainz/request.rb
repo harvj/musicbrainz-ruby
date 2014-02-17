@@ -2,6 +2,7 @@ module MusicBrainz
   class Request
 
     UNIQUE_IDENTIFIERS = %q{discid puid isrc iswc}
+    QUERY_SEPARATOR = '%20AND%20'
 
     def initialize(resource, params)
       @resource   = resource
@@ -20,9 +21,15 @@ module MusicBrainz
     end
 
     def options
-      options = {}
-      options[:query] = @params unless @params.empty?
-      options
+      if @params[:query]
+        options = '?query=' + @params.delete(:query)
+        if @params.any?
+          options += QUERY_SEPARATOR + @params.map{|k,v| "#{k}:#{v}"}.join(QUERY_SEPARATOR)
+        end
+      elsif @params[:inc]
+        options = '?inc=' + @params.delete(:inc)
+      end
+      options || ''
     end
 
   end

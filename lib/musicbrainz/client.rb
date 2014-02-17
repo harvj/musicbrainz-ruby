@@ -81,7 +81,7 @@ module MusicBrainz
     private
     def request(resource, params)
       request = Request.new(resource, params)
-      response = self.class.get(request.path, request.options)
+      response = self.class.get(request.path + request.options)
 
       if response.response.is_a? Net::HTTPBadRequest
         raise ArgumentError, response.parsed_response
