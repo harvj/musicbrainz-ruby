@@ -24,10 +24,12 @@ module MusicBrainz
       if @params[:query]
         options = '?query=' + @params.delete(:query)
         limit = @params.delete(:limit)
+        offset = @params.delete(:offset)
         if @params.any?
           options += QUERY_SEPARATOR + @params.map{|k,v| "#{k}:#{v}"}.join(QUERY_SEPARATOR)
         end
         options += "&limit=#{limit}" if limit.present?
+        options += "&offset=#{offset}" if offset.present?
       elsif @params[:inc]
         options = '?inc=' + @params.delete(:inc)
       end
