@@ -23,9 +23,11 @@ module MusicBrainz
     def options
       if @params[:query]
         options = '?query=' + @params.delete(:query)
+        limit = @params.delete(:limit)
         if @params.any?
           options += QUERY_SEPARATOR + @params.map{|k,v| "#{k}:#{v}"}.join(QUERY_SEPARATOR)
         end
+        options += "&limit=#{limit}" if limit.present?
       elsif @params[:inc]
         options = '?inc=' + @params.delete(:inc)
       end
